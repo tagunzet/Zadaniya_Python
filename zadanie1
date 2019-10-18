@@ -1,0 +1,17 @@
+import subprocess as sp
+import time
+programName = "notepad.exe"
+fileName = "file.txt"
+import os
+
+
+
+
+
+
+i = 0
+while i <=4 :
+    process = sp.Popen([programName, fileName])
+    time.sleep(1)
+    i = i + 1
+os.system("taskkill /im notepad.exe")
