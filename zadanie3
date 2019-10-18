@@ -1,0 +1,26 @@
+
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget
+import psutil
+
+
+
+
+
+
+from subprocess import Popen, PIPE
+print(*[line.decode('cp866', 'ignore') for line in Popen('tasklist', stdout=PIPE).stdout.readlines()])
+
+
+from PyQt5.QtWidgets import *
+import sys
+
+from tkinter import *
+root = Tk()
+
+lbox = Listbox(width=15 ,height=8)
+lbox.pack()
+
+
+
+root.mainloop()
