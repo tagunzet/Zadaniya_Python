@@ -1,0 +1,72 @@
+import sqlite3
+from tkinter import *
+
+
+
+
+def addItem():
+    lbox.delete(0, END)
+    conn = sqlite3.connect("mydatabase.db")
+    cursor = conn.cursor()
+    #sqlkey = "DELETE FROM Persons"
+    sqlkey = "INSERT INTO Persons VALUES ("+"'"+entry.get()+"'"+","+"'"+entry2.get()+"'"+")"
+    #sqlkey = "CREATE TABLE Persons (LastName varchar(255),FirstName varchar(255));"
+    lbox.insert(END, sqlkey)
+    print(sqlkey)
+    cursor.execute(sqlkey)
+    conn.commit()
+    sql = "SELECT * FROM Persons"
+
+    conn.commit()
+    cursor.execute(sql)
+    for row in cursor:
+        print(row)
+        lbox.insert(0,row)
+        f = open('list000.txt', 'w')
+
+        f.writelines("\n".join(row))
+        #f.close()
+
+
+def delList():
+    select = list(lbox.curselection())
+    select.reverse()
+    for i in select:
+        lbox.delete(i)
+
+
+def saveList():
+    print('ff')
+
+
+root = Tk()
+
+lbox = Listbox(selectmode=EXTENDED)
+lbox.pack(side=LEFT)
+scroll = Scrollbar(command=lbox.yview)
+scroll.pack(side=LEFT, fill=Y)
+lbox.config(yscrollcommand=scroll.set)
+
+f = Frame()
+f.pack(side=LEFT, padx=10 )
+entry = Entry(f)
+entry.pack(anchor=N)
+entry2 = Entry(f)
+entry2.pack(anchor=N)
+badd = Button(f, text="Add", command=addItem)
+badd.pack(fill=X)
+bdel = Button(f, text="Delete", command=delList)
+bdel.pack(fill=X)
+bsave = Button(f, text="Save", command=saveList)
+bsave.pack(fill=X)
+
+conn = sqlite3.connect("mydatabase.db")
+cursor = conn.cursor()
+sql = "SELECT * FROM Persons"
+cursor.execute(sql)
+for row in cursor:
+    lbox.insert(0, row)
+
+root.mainloop()
+
+##################№№№№№№№№№№№№№№№########################
