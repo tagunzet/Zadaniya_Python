@@ -1,0 +1,17 @@
+import zipfile
+import time
+
+import datetime
+
+now = datetime.datetime.now()
+ab = now.strftime("%H:%M")
+print(ab)
+ac = str(ab)
+print (ac)
+
+
+
+
+jungle_zip = zipfile.ZipFile('C:\\lazarus\\fi'+str(now).replace(':','')+'le.zip', 'w')
+jungle_zip.write('C:\\flashplayer32_xa_install.exe', compress_type=zipfile.ZIP_DEFLATED)
+jungle_zip.close()
